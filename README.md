@@ -1,0 +1,7 @@
+# Pomidoro
+
+***
+
+Simple pomodoro timer.
+
+***
