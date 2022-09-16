@@ -74,7 +74,6 @@ timer1_hr.grid(row=1, column=1, sticky='nw')
 colon()
 timer_colon.grid(row=1, column=2, sticky='nw')
 
-
 # T1 minutes
 timer1_min = Entry(body2, textvariable=mins1, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
                    width=2, relief='flat')
