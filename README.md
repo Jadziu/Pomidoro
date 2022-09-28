@@ -2,6 +2,6 @@
 
 ***
 
-Simple pomodoro timer.
+Simple pommodoro timer.
 
 ***
