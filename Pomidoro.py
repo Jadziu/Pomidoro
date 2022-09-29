@@ -19,6 +19,21 @@ class Pomidoro:
         """Make colon def for less code"""
         self.timer_colon = Label(self.body2, text=':', font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color)
 
+    def clear(self):
+        """Clear timers"""
+        self.hr1.set('00')
+        self.mins1.set('00')
+        self.secs1.set('00')
+        self.hr2.set('00')
+        self.mins2.set('00')
+        self.secs2.set('00')
+
+    def start(self):
+        """Temporary testing"""
+        # hr2 = self.hr1.get()
+        # self.hr2.set(hr2)
+        self.hr2.set(self.hr1.get())
+
     def main(self):
         """Main GUI body"""
         # Gui start.
@@ -66,20 +81,60 @@ class Pomidoro:
         self.timer_colon.grid(row=1, column=2, sticky='nw')
 
         # T1 minutes
-        timer1_min = Entry(self.body2, textvariable=self.mins1, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
-                           width=2, relief='flat')
+        timer1_min = Entry(self.body2, textvariable=self.mins1, font=("DS-digital", 60, 'bold'), bg=bg_color,
+                           fg=fg_color, width=2, relief='flat')
         timer1_min.grid(row=1, column=3, sticky='nw')
         self.colon()
         self.timer_colon.grid(row=1, column=4, sticky='nw')
 
         # T1 seconds
-        timer1_sec = Entry(self.body2, textvariable=self.secs1, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
-                           width=2, relief='flat')
+        timer1_sec = Entry(self.body2, textvariable=self.secs1, font=("DS-digital", 60, 'bold'), bg=bg_color,
+                           fg=fg_color, width=2, relief='flat')
         timer1_sec.grid(row=1, column=5, sticky='nw')
+
+        # ROW:2 timer two
+        # veriables:
+        self.hr2 = StringVar()
+        self.hr2.set('00')
+        self.mins2 = StringVar()
+        self.mins2.set('00')
+        self.secs2 = StringVar()
+        self.secs2.set('00')
 
         # TIMER2 title
         timer2_txt = Label(self.body2, text='TIMER2: ', font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color)
         timer2_txt.grid(row=2, column=0, sticky='nw')
+
+        # T2 hours
+        timer2_hr = Entry(self.body2, textvariable=self.hr2, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
+                          width=2, relief='flat')
+        timer2_hr.grid(row=2, column=1, sticky='nw')
+        self.colon()
+        self.timer_colon.grid(row=2, column=2, sticky='nw')
+
+        # T2 minutes
+        timer2_min = Entry(self.body2, textvariable=self.mins2, font=("DS-digital", 60, 'bold'), bg=bg_color,
+                           fg=fg_color, width=2, relief='flat')
+        timer2_min.grid(row=2, column=3, sticky='nw')
+        self.colon()
+        self.timer_colon.grid(row=2, column=4, sticky='nw')
+
+        # T2 seconds
+        timer2_sec = Entry(self.body2, textvariable=self.secs2, font=("DS-digital", 60, 'bold'), bg=bg_color,
+                           fg=fg_color, width=2, relief='flat')
+        timer2_sec.grid(row=2, column=5, sticky='nw')
+
+        # MODE SELECTION:
+
+        # START BUTTON:
+        start_btn = Button(body3, text='START', font=("DS-digital", 30, 'bold'), command=self.start)
+        start_btn.grid(row=3, column=0, padx=20)
+
+        stop_btn = Button(body3, text='STOP', font=("DS-digital", 30, 'bold'))
+        stop_btn.grid(row=3, column=1, padx=20)
+
+        clear_btn = Button(body3, text='CLEAR', font=("DS-digital", 30, 'bold'), command=self.clear)
+        clear_btn.grid(row=3, column=3, padx=20)
 
         self.root.mainloop()
 
