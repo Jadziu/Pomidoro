@@ -21,10 +21,8 @@ class Pomidoro:
 
     def clear(self):
         """Clear timers"""
-        self.hr1.set('00')
         self.mins1.set('00')
         self.secs1.set('00')
-        self.hr2.set('00')
         self.mins2.set('00')
         self.secs2.set('00')
 
@@ -32,7 +30,10 @@ class Pomidoro:
         """Temporary testing"""
         # hr2 = self.hr1.get()
         # self.hr2.set(hr2)
-        self.hr2.set(self.hr1.get())
+        self.mins2.set(self.mins1.get())
+        if self.secs1.get() == "00":
+            self.secs2.set('99')
+
 
     def main(self):
         """Main GUI body"""
@@ -62,8 +63,6 @@ class Pomidoro:
 
         # ROW:1 timer one
         # veriables:
-        self.hr1 = StringVar()
-        self.hr1.set('00')
         self.mins1 = StringVar()
         self.mins1.set('00')
         self.secs1 = StringVar()
@@ -73,29 +72,20 @@ class Pomidoro:
         timer1_txt = Label(self.body2, text='TIMER1: ', font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color)
         timer1_txt.grid(row=1, column=0, sticky='nw')
 
-        # T1 hours
-        timer1_hr = Entry(self.body2, textvariable=self.hr1, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
-                          width=2, relief='flat')
-        timer1_hr.grid(row=1, column=1, sticky='nw')
-        self.colon()
-        self.timer_colon.grid(row=1, column=2, sticky='nw')
-
         # T1 minutes
         timer1_min = Entry(self.body2, textvariable=self.mins1, font=("DS-digital", 60, 'bold'), bg=bg_color,
                            fg=fg_color, width=2, relief='flat')
-        timer1_min.grid(row=1, column=3, sticky='nw')
+        timer1_min.grid(row=1, column=1, sticky='nw')
         self.colon()
-        self.timer_colon.grid(row=1, column=4, sticky='nw')
+        self.timer_colon.grid(row=1, column=2, sticky='nw')
 
         # T1 seconds
         timer1_sec = Entry(self.body2, textvariable=self.secs1, font=("DS-digital", 60, 'bold'), bg=bg_color,
                            fg=fg_color, width=2, relief='flat')
-        timer1_sec.grid(row=1, column=5, sticky='nw')
+        timer1_sec.grid(row=1, column=3, sticky='nw')
 
         # ROW:2 timer two
         # veriables:
-        self.hr2 = StringVar()
-        self.hr2.set('00')
         self.mins2 = StringVar()
         self.mins2.set('00')
         self.secs2 = StringVar()
@@ -105,24 +95,17 @@ class Pomidoro:
         timer2_txt = Label(self.body2, text='TIMER2: ', font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color)
         timer2_txt.grid(row=2, column=0, sticky='nw')
 
-        # T2 hours
-        timer2_hr = Entry(self.body2, textvariable=self.hr2, font=("DS-digital", 60, 'bold'), bg=bg_color, fg=fg_color,
-                          width=2, relief='flat')
-        timer2_hr.grid(row=2, column=1, sticky='nw')
-        self.colon()
-        self.timer_colon.grid(row=2, column=2, sticky='nw')
-
         # T2 minutes
         timer2_min = Entry(self.body2, textvariable=self.mins2, font=("DS-digital", 60, 'bold'), bg=bg_color,
                            fg=fg_color, width=2, relief='flat')
-        timer2_min.grid(row=2, column=3, sticky='nw')
+        timer2_min.grid(row=2, column=1, sticky='nw')
         self.colon()
-        self.timer_colon.grid(row=2, column=4, sticky='nw')
+        self.timer_colon.grid(row=2, column=2, sticky='nw')
 
         # T2 seconds
         timer2_sec = Entry(self.body2, textvariable=self.secs2, font=("DS-digital", 60, 'bold'), bg=bg_color,
                            fg=fg_color, width=2, relief='flat')
-        timer2_sec.grid(row=2, column=5, sticky='nw')
+        timer2_sec.grid(row=2, column=3, sticky='nw')
 
         # MODE SELECTION:
 
