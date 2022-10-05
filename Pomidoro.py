@@ -1,3 +1,4 @@
+import time
 from time import strftime
 from tkinter import *
 
@@ -28,12 +29,25 @@ class Pomidoro:
 
     def start(self):
         """Temporary testing"""
-        # hr2 = self.hr1.get()
-        # self.hr2.set(hr2)
-        self.mins2.set(self.mins1.get())
-        if self.secs1.get() == "00":
-            self.secs2.set('99')
+        # Get time, timer, prepare for countdown.
+        gettime = (time.time_ns() / 1000000000)
+        timenow = gettime
+        counter = self.secs1.get()
+        counter = int(counter)
 
+        # Countdown loop.
+        while counter > 0:
+            gettime = (time.time_ns() / 1000000000)
+            if (gettime - timenow) >= 1:
+                timenow = gettime
+                counter -= 1
+
+                # Make number always two digit.
+                update = ("%02d" % counter)
+                self.secs1.set(str(update))
+
+            # Update GUI (IMPORTANT!!!!)
+            self.root.update()
 
     def main(self):
         """Main GUI body"""
