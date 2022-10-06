@@ -32,8 +32,11 @@ class Pomidoro:
         # Get time, timer, prepare for countdown.
         gettime = (time.time_ns() / 1000000000)
         timenow = gettime
-        counter = self.secs1.get()
-        counter = int(counter)
+        sec1 = self.secs1.get()
+        min1 = self.mins1.get()
+
+        # convert minutes and seconds to "one number".
+        counter = int(sec1) + (int(min1) * 60)
 
         # Countdown loop.
         while counter > 0:
@@ -42,9 +45,10 @@ class Pomidoro:
                 timenow = gettime
                 counter -= 1
 
-                # Make number always two digit.
-                update = ("%02d" % counter)
-                self.secs1.set(str(update))
+                # Use divmod to change "one number" to minutes and seconds.
+                up_min, up_sec = divmod(counter, 60)
+                self.secs1.set(str("%02d" % up_sec ))
+                self.mins1.set(str("%02d" % up_min))
 
             # Update GUI (IMPORTANT!!!!)
             self.root.update()
