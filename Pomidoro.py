@@ -131,9 +131,11 @@ class Pomidoro:
         start_btn = Button(body3, text='START', font=("DS-digital", 30, 'bold'), command=self.start)
         start_btn.grid(row=3, column=0, padx=20)
 
+        # STOP BUTTON:
         stop_btn = Button(body3, text='STOP', font=("DS-digital", 30, 'bold'))
         stop_btn.grid(row=3, column=1, padx=20)
 
+        # STOP BUTTON:
         clear_btn = Button(body3, text='CLEAR', font=("DS-digital", 30, 'bold'), command=self.clear)
         clear_btn.grid(row=3, column=3, padx=20)
 
