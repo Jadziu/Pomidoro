@@ -50,7 +50,10 @@ class Pomidoro:
         counter2 = int(sec2) + (int(min2) * 60)
 
         # Countdown loops.
-        print(f"Start counting timer1 {min1} min, {sec1} sec.")
+        print("Start counting timers")
+        print(f"Timer1: {min1} min, {sec1} sec.")
+        print(f"Timer2: {min2} min, {sec2} sec.")
+
         while counter1 > 0:
             gettime = (time.time_ns() / 1000000000)
             if (gettime - timenow) >= 1:
@@ -69,7 +72,6 @@ class Pomidoro:
             if not self.counting:
                 break
 
-        print(f"Start counting timer2 {min2} min, {sec2} sec.")
         while counter2 > 0 and counter1 == 0:
             gettime = (time.time_ns() / 1000000000)
             if (gettime - timenow) >= 1:
