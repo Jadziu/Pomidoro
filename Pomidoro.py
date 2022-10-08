@@ -23,11 +23,14 @@ class Pomidoro:
 
     def clear(self):
         """Clear timers"""
-        self.mins1.set('00')
-        self.secs1.set('00')
-        self.mins2.set('00')
-        self.secs2.set('00')
-        print("Timers cleared")
+        if not self.counting:
+            self.mins1.set('00')
+            self.secs1.set('00')
+            self.mins2.set('00')
+            self.secs2.set('00')
+            print("Timers cleared")
+        else:
+            print("Timers running...")
 
     def start(self):
         """Counting time down. Not used "sleep" function."""
@@ -36,25 +39,47 @@ class Pomidoro:
         timenow = gettime
         sec1 = self.secs1.get()
         min1 = self.mins1.get()
-        self.counting = True
+        sec2 = self.secs2.get()
+        min2 = self.mins2.get()
 
         # Set "stop" flag
-        print(f"Start counting {min1} min, {sec1} sec.")
+        self.counting = True
 
         # convert minutes and seconds to "one number".
-        counter = int(sec1) + (int(min1) * 60)
+        counter1 = int(sec1) + (int(min1) * 60)
+        counter2 = int(sec2) + (int(min2) * 60)
 
-        # Countdown loop.
-        while counter > 0:
+        # Countdown loops.
+        print(f"Start counting timer1 {min1} min, {sec1} sec.")
+        while counter1 > 0:
             gettime = (time.time_ns() / 1000000000)
             if (gettime - timenow) >= 1:
                 timenow = gettime
-                counter -= 1
+                counter1 -= 1
 
                 # Use divmod to change "one number" to minutes and seconds.
-                up_min, up_sec = divmod(counter, 60)
+                up_min, up_sec = divmod(counter1, 60)
                 self.secs1.set(str("%02d" % up_sec ))
                 self.mins1.set(str("%02d" % up_min))
+
+            # Update GUI (IMPORTANT!!!!)
+            self.root.update()
+
+            # Check "stop" flag.
+            if not self.counting:
+                break
+
+        print(f"Start counting timer2 {min2} min, {sec2} sec.")
+        while counter2 > 0 and counter1 == 0:
+            gettime = (time.time_ns() / 1000000000)
+            if (gettime - timenow) >= 1:
+                timenow = gettime
+                counter2 -= 1
+
+                # Use divmod to change "one number" to minutes and seconds.
+                up_min, up_sec = divmod(counter2, 60)
+                self.secs2.set(str("%02d" % up_sec))
+                self.mins2.set(str("%02d" % up_min))
 
             # Update GUI (IMPORTANT!!!!)
             self.root.update()
