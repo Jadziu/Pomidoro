@@ -4,6 +4,7 @@ from tkinter import *
 
 bg_color = "#db3939"
 fg_color = '#052a61'
+counting = False
 
 
 class Pomidoro:
@@ -26,14 +27,19 @@ class Pomidoro:
         self.secs1.set('00')
         self.mins2.set('00')
         self.secs2.set('00')
+        print("Timers cleared")
 
     def start(self):
-        """Temporary testing"""
+        """Counting time down. Not used "sleep" function."""
         # Get time, timer, prepare for countdown.
         gettime = (time.time_ns() / 1000000000)
         timenow = gettime
         sec1 = self.secs1.get()
         min1 = self.mins1.get()
+        self.counting = True
+
+        # Set "stop" flag
+        print(f"Start counting {min1} min, {sec1} sec.")
 
         # convert minutes and seconds to "one number".
         counter = int(sec1) + (int(min1) * 60)
@@ -52,6 +58,18 @@ class Pomidoro:
 
             # Update GUI (IMPORTANT!!!!)
             self.root.update()
+
+            # Check "stop" flag.
+            if not self.counting:
+                break
+
+        print("Counting ended")
+
+    def stop(self):
+        """Stop counting"""
+        # Set "stop" flag.
+        self.counting = False
+        print("Counting stoped")
 
     def main(self):
         """Main GUI body"""
@@ -132,7 +150,7 @@ class Pomidoro:
         start_btn.grid(row=3, column=0, padx=20)
 
         # STOP BUTTON:
-        stop_btn = Button(body3, text='STOP', font=("DS-digital", 30, 'bold'))
+        stop_btn = Button(body3, text='STOP', font=("DS-digital", 30, 'bold'), command=self.stop)
         stop_btn.grid(row=3, column=1, padx=20)
 
         # STOP BUTTON:
