@@ -1,6 +1,7 @@
 import time
 from time import strftime
 from tkinter import *
+from playsound import playsound
 
 bg_color = "#db3939"
 fg_color = '#052a61'
@@ -71,6 +72,7 @@ class Pomidoro:
             # Check "stop" flag.
             if not self.counting:
                 break
+        playsound('assets/gong.wav')
 
         while counter2 > 0 and counter1 == 0:
             gettime = (time.time_ns() / 1000000000)
@@ -90,6 +92,8 @@ class Pomidoro:
             if not self.counting:
                 break
 
+        playsound('assets/gong.wav')
+        playsound('assets/gong.wav')
         print("Counting ended")
 
     def stop(self):
